@@ -1,207 +1,199 @@
-综合应用-分页查询需求如下：
+Comprehensive Application - Paginated Query Requirements:
 
-技术要求使用tomcat10.1.48 编程语言使用JAVA
+Technical Requirements: Use Tomcat 10.1.48; Programming Language: Java
 
-1. 查询功能
+1. Query Functionality
 
-组合查询： ：可任意组合多个条件对数据库中的数据进行查询，部分字段支持模糊查询
+Combined Query: Supports querying database data by freely combining multiple conditions; partial fields support fuzzy queries
 
-分页查询： ：当数据库中的数据记录很多时，为了增加页面加载速度，提升用户体验，将记录分成很多页，用户通过分页导航读取显示需要的某页数据。每页显示的数据也可以自由选择。
+Pagination Query: When the database contains a large number of records, pagination divides the data into multiple pages to improve page loading speed and user experience. Users navigate through pages to view specific data. The number of records displayed per page is freely configurable.
 
-排序输出：选择某个字段对查询结果升序或降序显示
+Sorting Output: Sort query results in ascending or descending order based on a selected field.
 
-结果显示：结果显示在表格中
+Result Display: Results are displayed in a table.
 
-隔行换色：表格中给奇偶行填充不同的颜色，表格漂亮美观，方便阅读。
+Alternating Row Colors: Alternate row colors in the table for enhanced visual appeal and readability.
 
-高亮显示 ：当鼠标移动到表格某一行时，该行高亮显示（设置不同的背景色），更加醒目
+Row Highlighting: Highlight selected rows with a distinct background color when hovering over them for increased visibility.
 
-批量选择 ：表格第一列增加复选框，进行选择，以便后续的批量操作，选中的行也采用高亮的形式显示（设置不同的背景色）。
+Batch Selection: Add checkboxes to the first column for selecting rows. Selected rows are highlighted with a distinct background color for subsequent batch operations.
 
 
 
-2. 删除功能
+2. Deletion Functions
 
-单一删除：在表格的最后一列增加删除按钮，点击后可以对当前行进行删除
+Single Deletion: A delete button added to the last column of the table. Clicking it deletes the current row.
 
-批量删除：在表格的第一列增加复选框，点击工具栏按钮对选中的行进行一次性批量删除
+Batch Deletion: Checkboxes added to the first column of the table. Clicking the toolbar button deletes all selected rows at once.
 
 
 
-3. 修改功能
+3. Edit Functionality
 
-单一修改 ：在表格的最后一列增加修改按钮，点击后在当前页面弹出一个窗口，表单回显当前行数据，用户按需修改，保存后关闭弹出窗口，刷新表格数据
+Single Edit: Add an edit button to the last column of the table. Clicking it opens a pop-up window on the current page displaying the current row's data. Users can modify as needed, save changes, close the pop-up, and refresh the table data.
 
 
 
-4. 增加功能
+4. Add Functionality
 
-点击工具栏按钮，在当前页面弹出一个窗口，输入新增的各项数据，保存后关闭弹出窗口，刷新表格数据
+Click the toolbar button to open a popup window on the current page. Enter new data fields, save changes, close the popup, and refresh the table data.
 
+Below is the lesson plan:
 
-下面的是教案的
+1. CRUD Fundamentals
 
+CRUD represents four core data operations:
 
-1. CRUD 基本概念
+C – Create
+R – Retrieve
+U – Update
 
-CRUD 代表四类最基础的数据操作：
+D – Delete
 
-C – Create（增加）
+In this lesson, all CRUD operations are performed asynchronously via AJAX. This eliminates the need for full page refreshes, delivering a user experience closer to the smooth operation of C/S applications.
 
-R – Retrieve（读取/查询）
+2. Functional Requirements Analysis
+2.1 Query Functionality
 
-U – Update（更新）
+The query module must implement the following capabilities:
 
-D – Delete（删除）
+Combined Queries: Supports freely combining multiple field conditions, with partial fields enabling fuzzy searches
+(e.g., fuzzy name matching).
 
-在本课中，所有 CRUD 操作均通过 AJAX 异步方式 完成，因此无须刷新整个页面，用户体验更接近 C/S 程序的顺滑操作。
+Pagination: Return results in paginated sets for large datasets, improving loading speed. Users can select the number of records per page.
 
-2. 功能需求分析
-2.1 查询功能
+Sorting Output: Allow sorting by any field in ascending or descending order.
 
-查询模块需要实现以下能力：
+Results Displayed in Table: All query results are presented in a tabular format.
 
-组合查询：支持多个字段条件自由组合，且部分字段支持模糊查询
-（如姓名模糊匹配）。
+Table Interaction Optimization
 
-分页查询：大数据量场景下分页返回，提升加载速度。用户可选择每页条数。
+To enhance readability and user experience, the following is required:
 
-排序输出：允许按任意字段升序或降序排序。
+Alternating Row Colors: Different background colors for odd and even rows.
 
-结果显示于表格：所有查询结果以表格形式呈现。
+Row highlighting: Hovering over a row highlights it.
 
-表格交互优化
+Batch selection: A checkbox column enables bulk actions like deletion. Selected rows should be highlighted.
 
-为了提升可读性和体验，需要：
+2.2 Deletion Functionality
 
-隔行换色：奇偶行不同背景色。
+Deletion includes two types:
 
-行高亮：鼠标悬浮行高亮显示。
+Single-row deletion: Clicking a row's delete button sends an AJAX request to remove that record.
 
-批量选择：第一列提供复选框，用于批量删除等操作。被选中行需高亮。
+Batch deletion: Select multiple records and submit them to the backend batch deletion interface.
 
-2.2 删除功能
+After successful deletion, no page refresh is required; only the current table data is updated.
 
-删除包括两类：
+2.3 Edit Functionality
 
-单条删除：点击某行的删除按钮，即发送 AJAX 请求删除该条记录。
+The edit process includes:
 
-批量删除：选中多条记录，提交后端批量删除接口。
+Click “Edit” on a row
 
-删除成功后无需刷新页面，只更新当前表格数据。
+Inline input fields open, allowing modification of corresponding fields
 
-2.3 修改功能
+Click “Save” to submit changes to the backend via AJAX
 
-修改过程包括：
+After success, the row display is updated
 
-点击某行“编辑”
+No page redirection or full refresh is needed.
 
-行内输入框打开，可修改对应字段
+2.4 Addition Functionality (Create)
 
-点击“保存”后使用 AJAX 将更改提交到后端
+New data flow:
 
-成功后更新该行显示
+Fill out the new form at the top of the page or in a pop-up window
 
-无需跳转页面或整体刷新。
+Click the “Add” button
 
-2.4 增加功能（Create）
+Use AJAX to submit data to the backend in JSON or form format
 
-新增数据流程：
+Backend addition successful → Append a new row to the page or refresh the list
 
-在页面顶部或弹窗中填写新增表单
+3. System Design
 
-点击“新增”按钮
+System design primarily encompasses four major components: page design, interaction design, controller design, and DAO design.
 
-使用 AJAX 将数据以 JSON 或表单形式提交后端
+3.1 Page Design (Frontend)
 
-后端新增成功 → 页面追加新行或刷新列表
+Core page elements include:
 
-3. 系统设计
+Query input field and combined query area
 
-系统设计主要包括 页面设计、交互设计、控制器设计、DAO设计 四大块。
+Add/Batch Delete button area
 
-3.1 页面设计（前端）
+Pagination navigation
 
-核心页面元素包括：
+Sorting buttons (e.g., header click sorting)
 
-查询输入框及组合查询区域
+List display table
 
-新增/批量删除按钮区域
+Inline editing input fields
 
-分页导航
+CSS configurations for highlighting, alternating row colors, etc.
 
-排序按钮（如表头点击排序）
+The overall page layout balances usability and aesthetics.
 
-列表展示表格
+3.2 Interaction Design
+3.2.1 Human-Computer Interaction (Frontend Behaviors)
 
-行内编辑输入框
+Primary interactions:
 
-高亮、隔行换色等 CSS 配置
+Input field entry/change → Automatically updates search criteria
 
-页面整体布局兼顾易操作性与美观性。
+Mouse hover over row → Row highlighting
 
-3.2 交互设计
-3.2.1 人机交互（前端 behaviors）
+Checkbox selection → Row style change
 
-主要交互：
+Sort button click → Data re-fetch
 
-输入框输入 / 改变 → 自动更新搜索条件
+Pagination button click → Load corresponding page data (AJAX)
 
-鼠标悬浮行 → 行高亮
+Edit button click → Inline editing mode activated
 
-勾选复选框 → 行样式变化
+All interactions are dynamically rendered on the frontend without page reloads.
 
-点击排序按钮 → 重新请求数据
+3.2.2 Client-Server Interaction (Frontend/Backend APIs)
 
-点击分页按钮 → 加载对应页数据（AJAX）
+The backend primarily provides the following interfaces (actions invoked via AJAX):
 
-点击编辑 → 行内编辑模式开启
+Function    Request Method    Description
+Query    GET/POST    Return paginated, sorted data list
+Insert    POST    Add new record
+Update    POST/PUT    Modify a specific record
+Delete    POST/DELETE    Delete single or multiple records
 
-所有交互均为前端动态渲染，无需页面跳转。
+Client Tasks:
 
-3.2.2 客户端与服务器端交互（前后端 API）
+Send AJAX requests (XMLHttpRequest / jQuery AJAX)
 
-后端主要提供如下接口（动作以 AJAX 方式调用）：
+Receive JSON responses
 
-功能	请求方法	说明
-查询	GET/POST	返回分页、排序后的数据列表
-新增	POST	新增记录
-更新	POST/PUT	修改某条记录
-删除	POST/DELETE	删除单条或多条记录
+Update page DOM based on response results
 
-客户端任务：
+3.3 Controller Layer Design (Controller)
 
-发送 AJAX 请求（XMLHttpRequest / jQuery AJAX）
-
-接收 JSON 响应
-
-根据响应结果更新页面 DOM
-
-3.3 控制器层设计（Controller）
-
-控制器实现后端业务逻辑路由，例如：
+Controllers implement backend business logic routing, e.g.:
 
 /query.do
-
 /add.do
-
 /update.do
-
 /delete.do
-
 /deleteBatch.do
 
-控制器负责：
+The Controller is responsible for:
 
-接收前端参数
+Receiving frontend parameters
 
-调用 Service
+Invoking the Service
 
-返回 JSON 格式的数据（例如分页结果、成功/失败信息）
+Returning JSON-formatted data (e.g., paginated results, success/failure status)
 
-3.4 DAO 层设计
+3.4 DAO Layer Design
 
-DAO 层主要通过数据库操作实现 CRUD，如：
+The DAO layer primarily implements CRUD operations through database interactions, such as:
 
 selectByCondition
 
@@ -213,4 +205,7 @@ deleteById
 
 deleteBatch
 
-保证数据的持久层操作稳定、安全。
+Ensuring stable and secure operations at the data persistence layer.
+
+
+Translated with DeepL.com (free version)
