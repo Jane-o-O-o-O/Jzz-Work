@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Web 应用部署描述符
+    Web Application Deployment Descriptor
+
+    配置 Servlet、Filter、Listener 等组件
+    Configures Servlet, Filter, Listener and other components
+-->
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee
+         https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
+         version="6.0">
+
+    <!-- ==================== 应用基本信息 (Application Basic Information) ==================== -->
+
+    <!-- 应用显示名称 (Application Display Name) -->
+    <display-name>学生信息管理系统 (Student Information Management System)</display-name>
+
+    <!-- 应用描述 (Application Description) -->
+    <description>
+        基于 Java Web 的学生信息管理系统，实现学生信息的增删改查功能
+        Student Information Management System based on Java Web, implements CRUD operations for student information
+    </description>
+
+    <!-- ==================== 欢迎页面配置 (Welcome Page Configuration) ==================== -->
+
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
+
+    <!-- ==================== 字符编码过滤器 (Character Encoding Filter) ==================== -->
+
+    <!--
+        字符编码过滤器
+        设置请求和响应的字符编码为 UTF-8
+        Character Encoding Filter
+        Set request and response character encoding to UTF-8
+    -->
+    <filter>
+        <filter-name>EncodingFilter</filter-name>
+        <filter-class>com.jzz.filter.EncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>EncodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <!-- ==================== Servlet 配置 (Servlet Configuration) ==================== -->
+
+    <!--
+        注意：如果使用了 @WebServlet 注解，则不需要在此配置
+        Note: If @WebServlet annotation is used, no configuration is needed here
+
+        StudentServlet 已使用 @WebServlet 注解，无需在此配置
+        StudentServlet already uses @WebServlet annotation, no configuration needed here
+    -->
+
+    <!-- ==================== 会话配置 (Session Configuration) ==================== -->
+
+    <!--
+        会话超时时间（分钟）
+        Session timeout (minutes)
+    -->
+    <session-config>
+        <session-timeout>30</session-timeout>
+    </session-config>
+
+    <!-- ==================== 错误页面配置 (Error Page Configuration) ==================== -->
+
+    <!-- 404 错误页面 (404 Error Page) -->
+    <error-page>
+        <error-code>404</error-code>
+        <location>/error/404.html</location>
+    </error-page>
+
+    <!-- 500 错误页面 (500 Error Page) -->
+    <error-page>
+        <error-code>500</error-code>
+        <location>/error/500.html</location>
+    </error-page>
+
+    <!-- Java 异常页面 (Java Exception Page) -->
+    <error-page>
+        <exception-type>java.lang.Exception</exception-type>
+        <location>/error/exception.html</location>
+    </error-page>
+
+    <!-- ==================== MIME 类型配置 (MIME Type Configuration) ==================== -->
+
+    <mime-mapping>
+        <extension>json</extension>
+        <mime-type>application/json</mime-type>
+    </mime-mapping>
+
+</web-app>
